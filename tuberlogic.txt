@@ -1,0 +1,10 @@
+if (parentid = NULL){
+comment_op = AuthorName
+reply_op = NULL
+
+} else {
+if (parentID=id){
+comment_op = id.AuthorName
+reply_Op = thisrow.AuthorName
+}
+}
