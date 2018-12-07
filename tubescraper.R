@@ -9,18 +9,18 @@ library("googleAuthR")
 ## googleAuthRget
 options(googleAuthR.client_id = "802025607717-rme8q9i9irqq5c6qs7r15tropkbi9l3b.apps.googleusercontent.com")
 options(googleAuthR.client_secret = "kFfdXw2ZHqg2DIFR3JJ6-Njr")
-options(googleAuthR.scopes.selected = "https://www.googleapis.com/auth/youtube")
+options(googleAuthR.scopes.selected = "https://www.googleapis.com/auth/youtube.force-ssl")
 gar_auth()
 library(googleCloudStorageR)
 gcs_auth()
 googleAuthR::gar_auth()
 
 ##Instantiate variables
-  ## OAuth Client IDs must be generated for each machine that will access the API
-  app_id <- "802025607717-rme8q9i9irqq5c6qs7r15tropkbi9l3b.apps.googleusercontent.com"
-  app_secret <- "kFfdXw2ZHqg2DIFR3JJ6-Njr"
-  refresh_token <- "1/zjFw_8OSXyWs-CV-I6uBW0tO4CJSoXbwCH1X8Q6XGSI"
-  yt_oauth(app_id, app_secret, token=refresh_token, remove_old_oauth=TRUE)
+## OAuth Client IDs must be generated for each machine that will access the API
+app_id <- "802025607717-rme8q9i9irqq5c6qs7r15tropkbi9l3b.apps.googleusercontent.com"
+app_secret <- "kFfdXw2ZHqg2DIFR3JJ6-Njr"
+refresh_token <- "1/zjFw_8OSXyWs-CV-I6uBW0tO4CJSoXbwCH1X8Q6XGSI"
+yt_oauth(app_id, app_secret, token="..httr-oauth")
 channelid <- "UCSJ4gkVC6NrvII8umztf0Ow"
 
 
@@ -48,11 +48,17 @@ get_comment_threads(filter = NULL, part = "snippet", text_format = "text",
 ##write to video_id.csv
 write.csv(res, file= paste(vid_id, ".csv") )
 
-
-
-## Get Captions
-captrack <- list_caption_tracks(video_id = "cfHzr4eIXBg")
-caption <- get_captions(id=captrack$id)
+test <- c(head={'shit, shark, dog'}, tail={'poop, fin, tail'}, category={'thing, aqueous, landcrawler'})
+print(test)
+fart <- c(head='stuff', tail='poo', category='anus')
+write.csv(fart, file='test.csv')
+## Create Dataframe and CSV
+output <- c(video_id = vid_id, video_url=vidurl, video_title=vidtitle, 
+            channel=channel, series=series, video_snippet=vidsnippet,
+            video=vidb, comment=commb, reply=replyb, video_op=vidop, 
+            comment_op=commentop, reply_op=replyop, date_posted=converteddate,
+            content=content, date_scrape=datescrape)
+write.csv(output, paste(vid_id, ".csv"))
 
 
 ## https://www.youtube.com/watch?v=cfHzr4eIXBg LET ME EXPLAIN

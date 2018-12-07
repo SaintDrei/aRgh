@@ -1,0 +1,7 @@
+workflow:
+
+channelid <- "Inserthere"
+channel_videos <- list_channel_videos(channel_id = channelid)
+write.csv(channel_videos, file=paste(channelid, ".csv"))
+
+Create a loop for each video_id in channel_videos
