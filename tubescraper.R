@@ -43,12 +43,16 @@ plist_title <- playlists$items[[1]][[4]][[3]]
 plist_videos <- get_playlist_items(filter = c(playlist_id=plist_id), 
                 max_results = 50, simplify = TRUE)
 plist_count <- nrow(plist_videos)
+vid_list <- plist_videos$contentDetails.videoId
 
-
-write.csv(vid_list, file=paste("Channel_Videos_", channelid, ".csv")) 
+write.csv(vid_list, file=paste("Channel-Videos-", channelid, ".csv")) 
 ## Write to CSV
 
+
+
 ## Get Video Details
+
+
 deets <- get_video_details("cfHzr4eIXBg")
 print(get_video_details(video_id = "cfHzr4eIXBg"))
 print(deets$items[[1]][[4]][[9]][[1]])
