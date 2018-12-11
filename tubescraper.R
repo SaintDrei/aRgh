@@ -9,7 +9,7 @@ library("googleAuthR")
 ## googleAuthRget
 options(googleAuthR.client_id = "802025607717-rme8q9i9irqq5c6qs7r15tropkbi9l3b.apps.googleusercontent.com")
 options(googleAuthR.client_secret = "kFfdXw2ZHqg2DIFR3JJ6-Njr")
-options(googleAuthR.scopes.selected = "https://www.googleapis.com/auth/youtube.force-ssl")
+options(googleAuthR.scopes.selected = c("https://www.googleapis.com/auth/youtube.force-ssl", "https://www.googleapis.com/auth/youtube"))
 gar_auth()
 library(googleCloudStorageR)
 gcs_auth()
@@ -21,7 +21,7 @@ app_id <- "802025607717-rme8q9i9irqq5c6qs7r15tropkbi9l3b.apps.googleusercontent.
 app_secret <- "kFfdXw2ZHqg2DIFR3JJ6-Njr"
 refresh_token <- "1/zjFw_8OSXyWs-CV-I6uBW0tO4CJSoXbwCH1X8Q6XGSI"
 unlink(".httr-oauth") ##Delete .httr-oauth
-yt_oauth(app_id, app_secret, token=".httr-oauth")
+yt_oauth(app_id, app_secret, token=".httr-oauth", refresh-token=refresh_token)
 channelid <- "UCSJ4gkVC6NrvII8umztf0Ow"
 
 
@@ -45,6 +45,11 @@ plist_videos <- get_playlist_items(filter = c(playlist_id=plist_id),
 plist_count <- nrow(plist_videos)
 vid_list <- plist_videos$contentDetails.videoId
 
+
+for (vidid in vid_list){
+  print(vidid)
+}
+
 write.csv(vid_list, file=paste("Channel-Videos-", channelid, ".csv")) 
 ## Write to CSV
 
@@ -52,7 +57,7 @@ write.csv(vid_list, file=paste("Channel-Videos-", channelid, ".csv"))
 
 ## Get Video Details
 
-
+vidid = "Poqm4fTaFrQ"
 deets <- get_video_details("cfHzr4eIXBg")
 print(get_video_details(video_id = "cfHzr4eIXBg"))
 print(deets$items[[1]][[4]][[9]][[1]])
