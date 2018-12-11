@@ -21,7 +21,7 @@ app_id <- "802025607717-rme8q9i9irqq5c6qs7r15tropkbi9l3b.apps.googleusercontent.
 app_secret <- "kFfdXw2ZHqg2DIFR3JJ6-Njr"
 refresh_token <- "1/zjFw_8OSXyWs-CV-I6uBW0tO4CJSoXbwCH1X8Q6XGSI"
 unlink(".httr-oauth") ##Delete .httr-oauth
-yt_oauth(app_id, app_secret, token=".httr-oauth", refresh-token=refresh_token)
+yt_oauth(app_id, app_secret, token=".httr-oauth")
 channelid <- "UCSJ4gkVC6NrvII8umztf0Ow"
 
 
@@ -40,14 +40,25 @@ plistcount <- playlists$pageInfo[[1]]
 plist_id<- playlists$items[[1]][[3]]
 plist_title <- playlists$items[[1]][[4]][[3]]
 
+##Date conversion
+s<-Sys.time()
+format(s, tz="EST", usetz=TRUE)
+
 plist_videos <- get_playlist_items(filter = c(playlist_id=plist_id), 
                 max_results = 50, simplify = TRUE)
 plist_count <- nrow(plist_videos)
 vid_list <- plist_videos$contentDetails.videoId
 
+for ()
 
 for (vidid in vid_list){
-  print(vidid)
+  deets <- get_video_details(video_id = vidid)
+  print(deets)
+  print(get_video_details(video_id = "cfHzr4eIXBg"))
+  print(deets$items[[1]][[4]][[9]][[1]])
+  t <- deets$items[[1]][4]
+  print(t[[1]])
+  
 }
 
 write.csv(vid_list, file=paste("Channel-Videos-", channelid, ".csv")) 
